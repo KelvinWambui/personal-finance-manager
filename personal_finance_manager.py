@@ -1,19 +1,20 @@
 # A persnal finance manager project
 # class for transactions
+from datetime import datetime
 class Transaction:
-    def __init__(self,amount,date,description):
+    def __init__(self,amount,description):
         self.amount=amount
-        self.date=date
+        self.date=datetime.now()
         self.description=description
 #income class
 class Income(Transaction):
-    def __init__(self, amount, date, description,income_type):
-        super().__init__(amount, date, description)
+    def __init__(self, amount,description,income_type):
+        super().__init__(amount, description)
         self.income_type=income_type
 #expense class
 class Expense(Transaction):
-    def __init__(self, amount, date, description,category):
-        super().__init__(amount, date, description)
+    def __init__(self, amount,description,category):
+        super().__init__(amount,description)
         self.category=category
 #category class
 class Category:
@@ -33,12 +34,12 @@ class PersonalFinanceManager:
         self.categories=[]
         self.budgets=[]
 
-    def add_income(self, amount, date, description, income_type):
-        income = Income(amount, date, description, income_type)
+    def add_income(self, amount,description, income_type):
+        income = Income(amount,description, income_type)
         self.transactions.append(income)
 
-    def add_expense(self,amount,date,description,category):
-        expense=Expense(amount,date,description,category)
+    def add_expense(self,amount,description,category):
+        expense=Expense(amount,description,category)
         self.transactions.append(expense)
 
     def add_category(self,name,description):
@@ -98,7 +99,21 @@ class PersonalFinanceManager:
     def view_budgets(self):
             for budget in self.budgets:
                 print(f"The Budgets include\n\nBudget Amount:{budget.amount} - {budget.category} - {budget.description} \n")
-                
+while True:
+    try:
+        income_user=int(input("Enter the Your Income: "))
+        break
+    except ValueError:
+        print("Please Enter a Integer number")
+
+user = PersonalFinanceManager()
+user.add_income(income_user, "Monthly salary", "Employment")
+user.add_expense(8000, "House rent", "Rent")
+user.view_transactions()
+
+
+
+'''
 manager = PersonalFinanceManager()
 
 manager.add_income(50000, "2026-09-01", "Monthly salary", "Employment")
@@ -116,6 +131,6 @@ manager.add_budget(10000, "Food", "Monthly food budget")
 
 manager.view_categories()
 manager.view_budgets()
-
+'''
         
  
