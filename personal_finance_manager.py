@@ -99,16 +99,90 @@ class PersonalFinanceManager:
     def view_budgets(self):
             for budget in self.budgets:
                 print(f"The Budgets include\n\nBudget Amount:{budget.amount} - {budget.category} - {budget.description} \n")
+#Income Validation from user
 while True:
     try:
         income_user=int(input("Enter the Your Income: "))
         break
     except ValueError:
         print("Please Enter a Integer number")
+      
+while True:
+    income_description = input("Enter the description of your income: ")
+    has_digits=any(char.isdigit() for char in income_description)
+    if income_description and not has_digits:
+        break
+    
+    print("Enter a valid description.")
+while True:
+    income_type = input("Enter the Type of your income: ")
+    has_digits=any(char.isdigit() for char in income_type)
+    if income_type and not has_digits:
+        break
 
+    print("Enter a valid income type.")
+#Expense Validation  from user
+while True:
+    try:
+        expense_user=int(input("Enter amount of expense: "))
+        break
+    except ValueError:
+        print("Expense must be a number")
+while True:
+    expense_description = input("Enter the description of your Expense: ")
+    has_digits=any(char.isdigit() for char in expense_description)
+    if expense_description and not has_digits:
+        break
+    
+    print("Enter a valid description.")
+while True:
+    expense_category = input("Enter Expese category: ")
+    has_digits=any(char.isdigit() for char in expense_category)
+    if expense_category and not has_digits:
+        break
+
+    print("Enter a valid expense_category.")
+# Category validation
+while True:
+    user_category = input("Enter a category Name: ")
+    has_digits=any(char.isdigit() for char in user_category)
+    if user_category and not has_digits:
+        break
+
+    print("Enter a valid category Name.")
+while True:
+    user_cat_desc = input("Enter a category Description: ")
+    has_digits=any(char.isdigit() for char in user_cat_desc)
+    if user_cat_desc and not has_digits:
+        break
+
+    print("Enter a valid category Description.")    
+#Budget validation
+while True:
+    try:
+        budget_amount=int(input("Enter Budget Amount: "))
+        break
+    except ValueError:
+        print("Budget must be a number")
+while True:
+    budget_description = input("Enter the description of your Budget: ")
+    has_digits=any(char.isdigit() for char in budget_description)
+    if budget_description and not has_digits:
+        break
+    
+    print("Enter a budget description.")
+while True:
+    budget_category = input("Enter budget category: ")
+    has_digits=any(char.isdigit() for char in budget_category)
+    if budget_category and not has_digits:
+        break
+
+    print("Enter a valid budget_category.")
 user = PersonalFinanceManager()
-user.add_income(income_user, "Monthly salary", "Employment")
-user.add_expense(8000, "House rent", "Rent")
+user.add_income(income_user, income_description.capitalize(), income_type.capitalize())
+user.add_expense(expense_user, expense_description.capitalize(), expense_category.capitalize())
+user.add_category(user_category.capitalize(), user_cat_desc.capitalize())
+user.add_budget(budget_amount, budget_category.capitalize(), budget_description.capitalize())
 user.view_transactions()
 
 
